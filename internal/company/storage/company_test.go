@@ -72,3 +72,35 @@ func TestQueries_List(t *testing.T) {
 	require.NoError(t, err)
 	require.NotEmpty(t, list)
 }
+
+func TestQueries_ListWithFilter(t *testing.T) {
+
+	in1 := company.Company{
+		Name:    "TestFilterName1",
+		Code:    "TestFilterCode1",
+		Country: "TestFilterCountry1",
+		Website: "TestFilterWebsite1",
+		Phone:   "TestFilterPhone1",
+	}
+
+	in2 := company.Company{
+		Name:    "TestFilterName2",
+		Code:    "TestFilterCode2",
+		Country: "TestFilterCountry1",
+		Website: "TestFilterWebsite2",
+		Phone:   "TestFilterPhone2",
+	}
+
+	_, err := queries.Create(context.Background(), in1)
+	require.NoError(t, err)
+
+	_, err = queries.Create(context.Background(), in2)
+	require.NoError(t, err)
+
+	filter := map[string]string{"country": "TestFilterCountry1"}
+
+	list, err := queries.ListWithFilter(context.Background(), filter)
+	require.NoError(t, err)
+	require.NotEmpty(t, list)
+
+}

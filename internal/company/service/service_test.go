@@ -109,3 +109,35 @@ func TestService_List(t *testing.T) {
 	require.NoError(t, err)
 	require.NotEmpty(t, list)
 }
+
+func TestService_ListWithFilter(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	expectedList := []company.Company{{
+		ID:      1,
+		Name:    "Name1",
+		Code:    "Code1",
+		Country: "Country1",
+		Website: "Website1",
+		Phone:   "Phone1",
+	},
+		{
+			ID:      2,
+			Name:    "Name2",
+			Code:    "Code2",
+			Country: "Country1",
+			Website: "Website2",
+			Phone:   "Phone2",
+		},
+	}
+
+	filter := map[string]string{"country": "Country1"}
+
+	mockService := mock.NewMockService(ctrl)
+	mockService.EXPECT().ListWithFilter(context.Background(), filter).Return(expectedList, nil).Times(1)
+
+	list, err := mockService.ListWithFilter(context.Background(), filter)
+	require.NoError(t, err)
+	require.Len(t, list, 2)
+}

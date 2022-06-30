@@ -80,6 +80,21 @@ func (mr *MockServiceMockRecorder) List(arg0 interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "List", reflect.TypeOf((*MockService)(nil).List), arg0)
 }
 
+// ListWithFilter mocks base method.
+func (m *MockService) ListWithFilter(arg0 context.Context, arg1 map[string]string) ([]company.Company, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListWithFilter", arg0, arg1)
+	ret0, _ := ret[0].([]company.Company)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListWithFilter indicates an expected call of ListWithFilter.
+func (mr *MockServiceMockRecorder) ListWithFilter(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListWithFilter", reflect.TypeOf((*MockService)(nil).ListWithFilter), arg0, arg1)
+}
+
 // Update mocks base method.
 func (m *MockService) Update(arg0 context.Context, arg1 company.Company, arg2 int64) (company.Company, error) {
 	m.ctrl.T.Helper()
