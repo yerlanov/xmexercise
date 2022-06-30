@@ -1,0 +1,8 @@
+---
+
+listen:
+  port: ":10007"
+db:
+  uri: "postgres://username:password@host:5432/xm?sslmode=disable"
+ip_api_url: "https://ipapi.co"
+jwt_secret: "3P1zTzNtKLlF08PovqYKDa1dUdS7v2UA"
